@@ -29,8 +29,7 @@ class Solution {
 
         int mul = (head.val*2+carry);
         head.val=mul%10;
-        if((mul)>9) carry=1;
-        else carry=0;
+        carry=((mul)>9)?1:0;
 
     }
     public ListNode doubleIt(ListNode head) {
