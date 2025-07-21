@@ -9,15 +9,17 @@
  * }
  */
 class Solution {
-    static Set<Integer> del;
-    static Set<Integer> node;
-    static ListNode remove(ListNode head,int[] nums){
-
-        if(head==null) return null;
+    public ListNode modifiedList(int[] nums, ListNode head) {
         ListNode prev=new ListNode();
         prev.next=head;
         head=prev;
         ListNode curr =head;
+
+        Set<Integer> del = new HashSet<>();
+        for(int i: nums){
+           del.add(i);
+        }
+
         while(curr!=null){
             if(del.contains(curr.val)){
                 prev.next=curr.next;
@@ -27,23 +29,5 @@ class Solution {
                 prev=prev.next;
         }
         return head.next;
-    }
-    public ListNode modifiedList(int[] nums, ListNode head) {
-        ListNode temp = head;
-        node = new HashSet<>();
-        del=new HashSet<>();
-        while(temp!=null){
-            node.add(temp.val);
-            temp=temp.next;
-        }
-        for(int i:nums){
-            if(node.contains(i)){
-                del.add(i);
-            }
-        }
-        head=remove(head,nums);
-
-    
-        return head;
     }
 }
