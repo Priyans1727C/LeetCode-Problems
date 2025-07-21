@@ -9,15 +9,17 @@
  * }
  */
 class Solution {
+    static Set<Integer> che;
     static ListNode remove(ListNode head,int[] nums){
+
         if(head==null) return null;
         ListNode prev=new ListNode();
         prev.next=head;
         head=prev;
         ListNode curr =head;
         while(curr!=null){
-            if(Arrays.binarySearch(nums, curr.val)>-1){
-            
+            if(che.contains(curr.val)||Arrays.binarySearch(nums, curr.val)>-1){
+                che.add(curr.val);
                 prev.next=curr.next;
             }
             curr=curr.next;
@@ -27,6 +29,7 @@ class Solution {
         return head.next;
     }
     public ListNode modifiedList(int[] nums, ListNode head) {
+        che = new HashSet<>();
         Arrays.sort(nums);
         head=remove(head,nums);
 
