@@ -10,6 +10,7 @@
  */
 class Solution {
     static Set<Integer> del;
+    static Set<Integer> che;
     static ListNode remove(ListNode head){
         if(head==null) return null;
         ListNode prev=new ListNode();
@@ -17,7 +18,8 @@ class Solution {
         head=prev;
         ListNode curr =head;
         while(curr!=null){
-            if(del.contains(curr.val)){
+            if(che.contains(curr.val)||del.contains(curr.val)){
+                che.add(curr.val);
                 prev.next=curr.next;
             }
             curr=curr.next;
@@ -29,6 +31,7 @@ class Solution {
     public ListNode modifiedList(int[] nums, ListNode head) {
         ListNode temp = head;
         del = new HashSet<>();
+        che = new HashSet<>();
         for(int i: nums){
            del.add(i);
         }
