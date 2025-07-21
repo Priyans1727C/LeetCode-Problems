@@ -9,17 +9,15 @@
  * }
  */
 class Solution {
-    static Set<Integer> del;
-    static Set<Integer> che;
-    static ListNode remove(ListNode head){
+    static ListNode remove(ListNode head,int[] nums){
         if(head==null) return null;
         ListNode prev=new ListNode();
         prev.next=head;
         head=prev;
         ListNode curr =head;
         while(curr!=null){
-            if(che.contains(curr.val)||del.contains(curr.val)){
-                che.add(curr.val);
+            if(Arrays.binarySearch(nums, curr.val)>-1){
+            
                 prev.next=curr.next;
             }
             curr=curr.next;
@@ -29,13 +27,9 @@ class Solution {
         return head.next;
     }
     public ListNode modifiedList(int[] nums, ListNode head) {
-        ListNode temp = head;
-        del = new HashSet<>();
-        che = new HashSet<>();
-        for(int i: nums){
-           del.add(i);
-        }
-        head=remove(head);
+        Arrays.sort(nums);
+        head=remove(head,nums);
+
     
         return head;
     }
