@@ -9,17 +9,16 @@
  * }
  */
 class Solution {
+    void rmr(ListNode root,int val){
+        if(root==null)return;
+        rmr(root.next,val);
+        if(root.next!=null && root.next.val==val)
+            root.next = root.next.next;
+    }
     public ListNode removeElements(ListNode head, int val) {
-        ListNode prev =new ListNode();
-        prev.next=head;
-        ListNode curr=prev;
-        while(head!=null){
-            if(head.val==val){
-                prev.next=head.next;
-            }
-            head=head.next;
-            if(prev.next!=head)prev=prev.next;
-        }
-        return curr.next;
+       if(head==null) return null;
+       rmr(head,val);
+       if(head.val==val) return head.next;
+       return head;
     }
 }
