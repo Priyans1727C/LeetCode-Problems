@@ -7,7 +7,6 @@ class Solution {
             rev=rev*10+(x%10);
             x=x/10;
         }
-        System.out.println(rev);
         if(rev==ip) return true;
         return false;
     }
