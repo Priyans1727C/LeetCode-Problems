@@ -1,27 +1,31 @@
 class Solution {
-    static boolean ans;
-
-    void check(String s, int i) {
-        if (i >= s.length() / 2) return; 
-        if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
-            ans = false;
-            return; 
-        }
-        check(s, i + 1); 
-    }
-
     public boolean isPalindrome(String s) {
-        ans = true;
-        StringBuilder cleanBuilder = new StringBuilder();
+        int st = 0;
+        int ed = s.length() - 1;
 
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isLetterOrDigit(s.charAt(i))) {
-                cleanBuilder.append(Character.toLowerCase(s.charAt(i)));
+        while (st < ed) {
+            char ss = s.charAt(st);
+            char e = s.charAt(ed);
+
+            while (st < ed && !Character.isLetterOrDigit(ss)) {
+                st++;
+                ss = s.charAt(st);
             }
+
+            while (st < ed && !Character.isLetterOrDigit(e)) {
+                ed--;
+                e = s.charAt(ed);
+            }
+
+            if (Character.toLowerCase(ss) != Character.toLowerCase(e)) {
+                return false;
+            }
+
+            st++;
+            ed--;
         }
 
-        String clean = cleanBuilder.toString();
-        check(clean, 0);
-        return ans;
+        return true;
     }
+
 }
